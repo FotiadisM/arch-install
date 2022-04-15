@@ -1,0 +1,9 @@
+- name: Checkout dotfiles
+  block:
+  - git:
+      repo: https://github.com/FotiadisM/dotfiles.git
+      dest: $HOME/.dotfiles/
+      bare: yes
+  - shell: 
+      chdir: /home/fotiadis/
+      cmd: git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME/ checkout

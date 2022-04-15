@@ -1,0 +1,2 @@
+- include_tasks: ./gnome/main.yaml
+  when: desktop_environment == "gnome"

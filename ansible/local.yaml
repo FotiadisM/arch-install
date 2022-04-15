@@ -1,0 +1,21 @@
+- hosts: localhost
+  connection: local
+  become: true
+  # pre_tasks:
+  # - name: Update package cache
+  #   tags: always
+  #   pacman: update_cache=yes
+  #   changed_when: false
+  #   when: ansible_distribution == "Archlinux"
+  roles:
+  - role: archinstall
+    vars:
+      disk: "/dev/sda"
+      microcode: "intel-ucode"
+      country: "Greece"
+      zone: "Europe/Athens"
+      hostname: "transistor"
+      username: "fotiadis"
+
+  - role: workstation
+    when: configure is defined and configure == true

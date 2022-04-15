@@ -1,0 +1,27 @@
+system:
+  # if true, will install a base system
+  install_arch: true
+
+  user:
+    create: true
+    name: fotiadis
+    groups: ["wheel"]
+
+  hostname: transistor
+  cpu: intel # intel | amd
+
+  # either grub, systemd-boot
+  bootloader: grub
+
+  desktop_environment: gnome # gnome | none
+
+  extra:
+    bluetooth: true
+    wifi: true
+
+    # if true, will install power management utilites
+    laptop: true
+
+    trim_ssd: true
+
+configure: true

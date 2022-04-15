@@ -1,0 +1,7 @@
+- name: Configure the system
+  block:
+  - include_tasks: dotfiles.yaml
+
+  - name: Configure desktop environment
+    include_tasks: desktop_environments/main.yaml
+    when: desktop_environment is defined

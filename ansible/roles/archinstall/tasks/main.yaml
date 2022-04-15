@@ -1,0 +1,73 @@
+- name: Installing Arch Linux..
+  block:
+    - name: Abort if the host is not booted from the Arch install media
+      fail:
+        msg: "This host is not booted from the Arch install media"
+      when: ansible_nodename != 'archiso'
+
+    - name: Synchronize clock via NTP
+      command: timedatectl set-ntp true
+
+    # TODO: format and mount drives
+
+    - name: Run reflector
+      command: "reflector --country {{ country }} --protocol https --latest 5 --sort rate -- save /etc/pacman.d/mirrorlist"
+
+    - name: Enable parallel downloads
+      command: sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/packman.conf
+
+    - name: Run pacstrap
+      command: "pacstrap /mnt base linux linux-firmware linux-headers btrfs-progs {{ microcode }} neovim"
+
+    - name: Generate /etc/fstab
+      command: genfstab -U /mnt >> /mnt/etc/fstab
+
+    - name: Remove subvolid from /etc/fstab
+      command: sed -i 's/subvolid=[0-9]*//g' /mnt/etc/fstab
+
+    - name: Set zone info
+      command: "arch-chroot /mnt ln -sf /usr/share/zoneinfo/{{ zoneinfo }} /etc/localtime"
+
+    - name: Synchronize hardware clock
+      command: arch-chroot /mnt hwclock --systohc
+
+    - name: Edit /etc/locale.gen
+      command: sed -i 's/^# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/' /mnt/etc/locale.gen
+
+    - name: Generate locale
+      command: arch-chroot /mnt locale-gen
+
+    - name: Set language
+      command: echo 'LANG=en_US.UTF-8' >> /mnt/etc/locale.conf
+
+    - name: Set hostname
+      command: "echo '{{ hostname }}' >> /mnt/etc/hostname"
+
+    - name: Set hosts
+      lineinfile:
+        path: hosts
+        line: last
+
+    - name: Enable parallel downloads
+      command: sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /mnt/etc/packman.conf
+
+    - name: Enable pacman colored output
+      command: arch-chroot /mnt sed -i 's/^#Color/Color/' /mnt/etc/packman.conf
+
+    - name: Install base packages
+      command: arch-chroot /mnt pacman -S --noconfirm base-devel grub grub-btrfs efibootmgr mtools dosfstools networkmanager network-manager-applet wpa_supplicant alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse pipewire-media-session xdg-utils xdg-user-dirs reflector
+
+    - name: Install grub
+      command: arch-chroot /mnt grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+
+    - name: Generate grub config
+      command: arch-chroot /mnt grub-mkconfig -o /boot/grub/grub.cfg
+
+    - name: Enable pacman colored output
+      command: arch-chroot /mnt sed -i 's/^#Color/Color/' /mnt/etc/packman.conf
+
+    - name: Enable pacman colored output
+      command: arch-chroot /mnt sed -i 's/^#Color/Color/' /mnt/etc/packman.conf
+
+    - name: Enable pacman colored output
+      command: arch-chroot /mnt sed -i 's/^#Color/Color/' /mnt/etc/packman.conf

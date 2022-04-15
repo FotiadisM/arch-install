@@ -1,0 +1,3 @@
+- name: install gnome
+  tags: gnome
+  shell: "echo '{{ configure }} wowwow' | tee -a /tmp/vars"
