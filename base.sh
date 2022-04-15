@@ -10,19 +10,29 @@ user="fotiadis"
 
 timedatectl set-ntp true
 
-# TODO: partition drive
-# parted $dev mklable gpt
-# parted $dev mkpart P1 fat32 0% +512M
-# parted $dev mkpart P2 linux-swap 0% +512M
-# parted $dev mkpart P3 btrfs 0% +512M
+sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | fdisk $dev
+g # create gpt table
+n # new partition
 
-# sed -e 's/\s*\([\+0-9a-zA-Z]*\).*/\1/' <<EOF | fdisk $dev
-# g # create gpt table
-# n # new partition
 
-# EOF
++512M
+t
+1
+n
 
-mkfs.fat -F32 / $dev"1"
+
++2G
+t
+2
+19
+n
+
+
+
+w
+EOF
+
+mkfs.fat -F32 $dev"1"
 mkswap $dev"2"
 swapon $dev"2"
 mkfs.btrfs $dev"3"
@@ -38,6 +48,8 @@ btrfs su cr /mnt/@root
 btrfs su cr /mnt/@opt
 btrfs su cr /mnt/@local
 btrfs su cr /mnt/@snapshots
+
+umount /mnt
 
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@ /mnt
 mkdir -p /mnt/{boot,home,tmp,var/log,var/cache,srv,root,opt,usr/local,.snapshots}
