@@ -3,7 +3,7 @@
 set -eu
 
 dev="/dev/sda"
-countru="Greece"
+country="Greece"
 zoneinfo="Europe/Athens"
 hostname="transistor"
 user="fotiadis"
@@ -64,7 +64,7 @@ mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,s
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@snapshots /mnt/.snapshots
 mount $dev"1" /mnt/boot
 
-reflector --country $country --protocol https --latest 5 --sort rate -- save /etc/pacman.d/mirrorlist
+reflector --country $country --protocol https --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
 sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/packman.conf
 
 pacstrap /mnt base linux linux-firmware linux-headers btrfs-progs intel-ucode neovim
