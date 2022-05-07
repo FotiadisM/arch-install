@@ -1,6 +1,6 @@
 #! /bin/env bash
 
-set -eu
+set -eux
 
 dev="/dev/sda"
 country="Greece"
@@ -65,7 +65,7 @@ mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,s
 mount $dev"1" /mnt/boot
 
 reflector --country $country --protocol https --latest 5 --sort rate --save /etc/pacman.d/mirrorlist
-sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/packman.conf
+sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
 
 pacstrap /mnt base linux linux-firmware linux-headers btrfs-progs intel-ucode neovim
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -84,8 +84,8 @@ EOF
 
 # NOTE: maybe edit /etc/mkinitcpio.conf ?
 
-sed -i 's/^#Color/Color/' /etc/packman.conf
-sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/packman.conf
+sed -i 's/^#Color/Color/' /etc/pacman.conf
+sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
 
 # possible icnlude nfs-utils inetutils
 pacman -S base-devel \
