@@ -88,7 +88,8 @@ sed -i 's/^#Color/Color/' /etc/pacman.conf
 sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
 
 # possible icnlude nfs-utils inetutils
-pacman -S base-devel \
+pacman -S --noconfirm \
+	base-devel \
 	grub grub-btrfs efibootmgr mtools dosfstools \
 	networkmanager network-manager-applet wpa_supplicant \
 	bluez bluez-utils cups \
@@ -148,35 +149,35 @@ EOF
 # TODO: enable snapper systemctl services
 
 # TERM
-pacman -S man-db man-pages git zsh fzf bat fd htop jq neofetch ripgrep tldr tmux tree
+pacman -S --noconfirm man-db man-pages git zsh fzf bat fd htop jq neofetch ripgrep tldr tmux tree
 git clone https://aur.archlinux.org/yay.git
 (cd yay && makepkg -sic)
 rm -rf yay
 yay -S pfetch lf
 
 # dev
-pacman -S go nodejs npm yarn kubectl helm terraform github-cli hugo
+pacman -S --noconfirm go nodejs npm yarn kubectl helm terraform github-cli hugo
 
 # pacman -S tuned
 
 # GUI 
 
 #gnome
-pacman -S gnome gnome-tweaks gnome-software-packagekit-plugin xclip dconf-editor 
+pacman -S --noconfirm gnome gnome-tweaks gnome-software-packagekit-plugin xclip dconf-editor 
 pacman -Rsn gnome-boxes epiphany
-yay -S extension-manager
+yay -S --noconfirm extension-manager
 systemctl enable gdm.service
 
 #qemu
-pacman -S qemu qemu-arch-extra libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat virt-manager
+pacman -S --noconfirm qemu qemu-arch-extra libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat virt-manager
 # TODO: additional config required, https://wiki.archlinux.org/title/Virt-Manager
 systemctl enable libvirtd.service
 
 # general
-pacman -S allacritty discord kdeconnect obs-studio signal-desktop vlc zathura zathura-pdf-mupdf zathura-djvu xournalpp transmission-gtk
+pacman -S --noconfirm allacritty discord kdeconnect obs-studio signal-desktop vlc zathura zathura-pdf-mupdf zathura-djvu xournalpp transmission-gtk
 
 # yay
-yay -S brave-bin popcorntime-bin spotify-adblock
+yay -S --noconfirm brave-bin popcorntime-bin spotify-adblock
 
 git clone --bare git@github.com:FotiadisM/dotfiles.git /home/$user/.dotfiles
 git --git-dir=/home/$user/.dotfiles/ --work-tree=/home/$user/ checkout -f
