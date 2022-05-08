@@ -149,7 +149,7 @@ EOF
 # TODO: enable snapper systemctl services
 
 # TERM
-pacman -S --noconfirm man-db man-pages git zsh fzf bat fd htop jq neofetch ripgrep tldr tmux tree
+pacman -S --noconfirm man-db man-pages git zsh stow fzf bat fd htop jq neofetch ripgrep tldr tmux tree
 git clone https://aur.archlinux.org/yay.git
 (cd yay && makepkg -sic)
 rm -rf yay
