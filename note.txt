@@ -1,0 +1,47 @@
+NOTE: add stow to arch-install
+
+- install Sauce Code Pro Nerd Font
+	download link: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete%20Mono.ttf
+
+- install packer
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim\ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
+- pip install ueberzug
+
+- set up zsh
+	export ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh"
+	export ZSH_CUSTOM=${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh/custom
+	and run oh-my-zsh install script
+
+	install power10k
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+	install plugins
+	git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+	git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	git clone --depth=1 https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+
+	create history file
+	touch ~/.config/zsh/.zsh_history
+
+	delete not used files
+	rm .bashrc .bash_history .bash_logout .bash_profile .zshrc .zcompdump .zcompdump-transistor-5.8.1 .zsh_history
+
+- set up tmux plugins
+
+	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+	<Prefix> + I
+
+- clean up
+	
+	mv ~/.gnupg ~/.config/
+	rm ~/.lesshst
+
+- scripts/binaries
+
+	notflix
+	npm install -g peerflix
+	curl -sL "https://raw.githubusercontent.com/Bugswriter/notflix/master/notflix" -o /usr/local/bin/notflix
+	sudo chmod +x /usr/local/bin/notflix
+
