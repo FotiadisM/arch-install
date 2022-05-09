@@ -150,34 +150,36 @@ EOF
 
 # TERM
 pacman -S --noconfirm man-db man-pages git zsh stow fzf bat fd htop jq neofetch ripgrep tldr tmux tree
-git clone https://aur.archlinux.org/yay.git
+git clone https://aur.archlinux.org/yay-git.git
 (cd yay && makepkg -sic)
-rm -rf yay
+rm -rf yay-git
 yay -S pfetch lf
-
-# dev
-pacman -S --noconfirm go nodejs npm yarn kubectl helm terraform github-cli hugo
-
-# pacman -S tuned
 
 # GUI 
 
-#gnome
+# gnome
 pacman -S --noconfirm gnome gnome-tweaks gnome-software-packagekit-plugin xclip dconf-editor 
 pacman -Rsn gnome-boxes epiphany
-yay -S --noconfirm extension-manager
+yay -S extension-manager kora-icon-theme
 systemctl enable gdm.service
 
-#qemu
+# dev
+pacman -S --noconfirm nodejs npm yarn kubectl helm terraform github-cli hugo python-pip
+
+# pacman -S tuned
+
+# qemu
 pacman -S --noconfirm qemu qemu-arch-extra libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat virt-manager
-# TODO: additional config required, https://wiki.archlinux.org/title/Virt-Manager
+sed -i 's/^#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf
+sed -i 's/^#unix_sock_ro_perms = "0777"/unix_sock_ro_perms = "0777"/' /etc/libvirt/libvirtd.conf
+usermod -aG libvirt $user
+# TODO: the variable needs fixing
+sed -i "s/^#user = \"root\"/user = \"$user\"/" /etc/libvirt/qemu.conf
+sed -i "s/^#group = \"root\"/group = \"$user\"/" /etc/libvirt/qemu.conf
 systemctl enable libvirtd.service
 
 # general
 pacman -S --noconfirm allacritty discord kdeconnect obs-studio signal-desktop vlc zathura zathura-pdf-mupdf zathura-djvu xournalpp transmission-gtk
 
 # yay
-yay -S --noconfirm brave-bin popcorntime-bin spotify-adblock
-
-git clone --bare git@github.com:FotiadisM/dotfiles.git /home/$user/.dotfiles
-git --git-dir=/home/$user/.dotfiles/ --work-tree=/home/$user/ checkout -f
+yay -S brave-bin popcorntime-bin spotify-adblock
