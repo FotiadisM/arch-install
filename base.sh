@@ -43,6 +43,8 @@ btrfs su cr /mnt/@home
 btrfs su cr /mnt/@tmp
 btrfs su cr /mnt/@log
 btrfs su cr /mnt/@cache
+btrfs su cr /mnt/@flatpak
+btrfs su cr /mnt/@libvirt
 btrfs su cr /mnt/@srv
 btrfs su cr /mnt/@root
 btrfs su cr /mnt/@opt
@@ -57,6 +59,8 @@ mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,s
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@tmp /mnt/tmp
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@log /mnt/var/log
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@cache /mnt/var/cache
+mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@flatpak /mnt/var/lib/flatpak
+mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@flatpak /mnt/var/lib/libvirt
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@srv /mnt/srv
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@root /mnt/root
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@opt /mnt/opt
@@ -93,7 +97,7 @@ pacman -S --noconfirm \
 	grub grub-btrfs efibootmgr mtools dosfstools \
 	networkmanager network-manager-applet wpa_supplicant \
 	bluez bluez-utils cups \
-	alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse pipewire-media-session \
+	alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber \
 	xdg-utils xdg-user-dirs \
 	reflector
 
@@ -169,7 +173,7 @@ pacman -S --noconfirm nodejs npm yarn kubectl helm terraform github-cli hugo pyt
 # pacman -S tuned
 
 # qemu
-pacman -S --noconfirm qemu qemu-arch-extra libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat virt-manager
+pacman -S --noconfirm qemu-full libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat virt-manager
 sed -i 's/^#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf
 sed -i 's/^#unix_sock_ro_perms = "0777"/unix_sock_ro_perms = "0777"/' /etc/libvirt/libvirtd.conf
 usermod -aG libvirt $user
