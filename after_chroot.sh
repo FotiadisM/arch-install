@@ -18,8 +18,6 @@ cat >> /etc/hosts << EOF
 ::1              localhost
 EOF
 
-# NOTE: maybe edit /etc/mkinitcpio.conf ?
-
 sed -i 's/^#Color/Color/' /etc/pacman.conf
 sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
 

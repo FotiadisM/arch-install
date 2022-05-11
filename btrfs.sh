@@ -20,7 +20,6 @@ mount -a
 chmod 755 /.snapshots
 chown :users /.snapshots
 # TODO: add user to ALLOW_USERS in /etc/snapper/configs/root
-# TODO: edit snapper root config
 
 # include /boot in the backup
 mkdir /etc/pacman.d/hooks/
@@ -39,5 +38,5 @@ When = PostTransaction
 Exec = /usr/bin/rsync -a --delete /boot /.bootbackup
 EOF
 
-# TODO: enable snapper systemctl services
+# TODO: edit snapper root config and enable snapper systemctl services
 systemctl enable grub-btrfs.path

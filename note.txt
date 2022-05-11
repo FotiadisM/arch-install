@@ -1,5 +1,3 @@
-NOTE: add stow to arch-install
-
 - install Sauce Code Pro Nerd Font
 	download link: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete%20Mono.ttf
 

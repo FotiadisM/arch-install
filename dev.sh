@@ -58,7 +58,6 @@ pacman -S --noconfirm qemu-full libvirt edk2-ovmf iptables-nft dnsmasq dmidecode
 sed -i 's/^#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf
 sed -i 's/^#unix_sock_ro_perms = "0777"/unix_sock_ro_perms = "0777"/' /etc/libvirt/libvirtd.conf
 usermod -aG libvirt $user
-# TODO: the variable needs fixing
 sed -i "s/^#user = \"root\"/user = \"$user\"/" /etc/libvirt/qemu.conf
 sed -i "s/^#group = \"root\"/group = \"$user\"/" /etc/libvirt/qemu.conf
 systemctl enable libvirtd.service
