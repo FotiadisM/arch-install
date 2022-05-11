@@ -13,7 +13,11 @@ export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share/}/npm"
 
 pacman -S --noconfirm curl gcc nodejs npm yarn python-pip
 curl https://sh.rustup.rs -sSf | sh
-rm -rf /usr/local/go && tar -C /usr/local -xzf go1.18.2.linux-amd64.tar.gz
+# NOTE: need to find way to download the latest
+go_version=$(wget --no-check-certificate -qO- https://golang.org/dl | grep -oP "go([0-9\.]+)\.linux-amd64\.tar\.gz" | head -n 1
+go1.18.2.linux-amd64.tar.gz)
+wget https://go.dev/dl/$go_version -O /tmp/$go_version
+rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/$go_version
 
 pacman -S --noconfirm man-db man-pages git zsh stow fzf fd htop jq ripgrep tldr tmux tree
 git clone --depth 1 https://aur.archlinux.org/yay-bin.git
