@@ -4,9 +4,10 @@ NOTE: add stow to arch-install
 	download link: https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/SourceCodePro/Regular/complete/Sauce%20Code%20Pro%20Nerd%20Font%20Complete%20Mono.ttf
 
 - install packer
-	git clone --depth 1 https://github.com/wbthomason/packer.nvim\ ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+	git clone --depth 1 https://github.com/wbthomason/packer.nvim.git ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 - pip install ueberzug
+also ffmpegthumbnailer, ImageMagick poppler, epub-thumbnailer, wkhtmltopdf, chafa 
 
 - set up zsh
 	export ZSH="${XDG_DATA_HOME:-$HOME/.local/share}/oh-my-zsh"
@@ -25,11 +26,11 @@ NOTE: add stow to arch-install
 	touch ~/.config/zsh/.zsh_history
 
 	delete not used files
-	rm .bashrc .bash_history .bash_logout .bash_profile .zshrc .zcompdump .zcompdump-transistor-5.8.1 .zsh_history
+	rm .bashrc .bash_history .bash_logout .bash_profile .zshrc .zcompdump* .zsh_history
 
 - set up tmux plugins
 
-	git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+	git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
 
 	<Prefix> + I
 
@@ -45,3 +46,11 @@ NOTE: add stow to arch-install
 	curl -sL "https://raw.githubusercontent.com/Bugswriter/notflix/master/notflix" -o /usr/local/bin/notflix
 	sudo chmod +x /usr/local/bin/notflix
 
+	argo
+	argocd
+	hugo
+	k3d
+	k9s
+	kubeseal
+	linode-cli
+	minikube
