@@ -25,7 +25,7 @@ pacman -S --noconfirm \
 	base-devel \
 	grub efibootmgr mtools dosfstools \
 	networkmanager network-manager-applet wpa_supplicant \
-	bluez bluez-utils cups \
+	bluez bluez-utils cups acpid \
 	alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber \
 	xdg-utils xdg-user-dirs \
 	reflector
@@ -38,7 +38,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # TODO: change reflector config
 
-systemctl enable NetworkManager reflector.service fstrim.timer bluetooth.service cups.service
+systemctl enable NetworkManager reflector.service fstrim.timer bluetooth.service cups.service acpid.service
 
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 useradd -mG wheel $user
