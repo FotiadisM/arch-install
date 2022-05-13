@@ -11,7 +11,7 @@ systemctl enable gdm.service power-profiles-daemon.service
 dconf load / < $1
 
 # general
-pacman -S --noconfirm allacritty discord signal-desktop zathura zathura-pdf-mupdf xournalpp
+pacman -S --noconfirm allacritty discord signal-desktop zathura zathura-pdf-mupdf xournalpp fragments libreoffice-fresh
 
 # yay
 yay -S brave-bin popcorntime-bin spotify-adblock
