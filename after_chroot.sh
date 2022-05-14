@@ -9,7 +9,7 @@ user="fotiadis"
 
 ln -sf /usr/share/zoneinfo/$zoneinfo /etc/localtime
 hwclock --systohc
-sed -i 's/^# en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
+sed -i 's/^#en_US.UTF-8/en_US.UTF-8/' /etc/locale.gen
 locale-gen
 echo 'LANG=en_US.UTF-8' >> /etc/locale.conf
 echo $hostname >> /etc/hostname
@@ -38,7 +38,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 # TODO: change reflector config
 
-systemctl enable NetworkManager reflector.service fstrim.timer bluetooth.service cups.service acpid.service
+systemctl enable NetworkManager reflector.timer fstrim.timer bluetooth.service cups.service acpid.service
 
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 useradd -mG wheel $user

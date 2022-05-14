@@ -2,7 +2,7 @@
 
 set -eux
 
-pacman -S --noconfirm grub-btrfs snapper
+pacman -S --noconfirm grub-btrfs snapper snap-pac rsync
 
 # needed for btrfs /tmp subvolume
 cat > /etc/tmpfiles.d/tmp.conf << EOF
@@ -20,6 +20,8 @@ mount -a
 chmod 755 /.snapshots
 chown :users /.snapshots
 # TODO: add user to ALLOW_USERS in /etc/snapper/configs/root
+# sed ALLOW_USERS=""
+# sed ALLOW_GROUPS=""
 
 # include /boot in the backup
 mkdir /etc/pacman.d/hooks/

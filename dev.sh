@@ -11,15 +11,15 @@ export NPM_CONFIG_CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/npm"
 export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share/}/npm"
 
 
-pacman -S --noconfirm curl gcc nodejs npm yarn python-pip
+sudo pacman -S --noconfirm curl gcc nodejs npm yarn python-pip
 curl https://sh.rustup.rs -sSf | sh
 # NOTE: need to find way to download the latest
 go_version=$(wget --no-check-certificate -qO- https://golang.org/dl | grep -oP "go([0-9\.]+)\.linux-amd64\.tar\.gz" | head -n 1
 go1.18.2.linux-amd64.tar.gz)
 wget https://go.dev/dl/$go_version -O /tmp/$go_version
-rm -rf /usr/local/go && tar -C /usr/local -xzf /tmp/$go_version
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/$go_version
 
-pacman -S --noconfirm man-db man-pages git zsh stow fzf fd htop jq ripgrep tldr tmux tree
+sudo pacman -S --noconfirm man-db man-pages git zsh stow fzf fd htop jq ripgrep tldr tmux tree
 git clone --depth 1 https://aur.archlinux.org/yay-bin.git
 (cd yay-bin && makepkg -sic)
 rm -rf yay-bin
@@ -35,10 +35,9 @@ yay -S pandoc-bin
 git clone --depth 1 https://github.com/wbthomason/packer.nvim.git ~/.local/share/nvim/site/pack/packer/start/packer.nvim
 
 # lf
-yay -S lf
+yay -S lf-bin
 pip install ueberzug
-pacman -S --noconfirm ffmpegthumbnailer imagemagick poppler gnome-epub-thumbnailer 	wkhtmltopdf bat chafa
-pacman -S bat
+pacman -S --noconfirm ffmpegthumbnailer imagemagick poppler gnome-epub-thumbnailer wkhtmltopdf bat chafa
 
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm
@@ -58,12 +57,13 @@ touch ~/.config/zsh/.zsh_history
 pacman -S --noconfirm kubectl helm terraform github-cli hugo
 
 # qemu
-pacman -S --noconfirm qemu-full libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat virt-manager
+sudo pacman -S qemu-full libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge-utils openbsd-netcat virt-manager
 sed -i 's/^#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf
 sed -i 's/^#unix_sock_ro_perms = "0777"/unix_sock_ro_perms = "0777"/' /etc/libvirt/libvirtd.conf
 usermod -aG libvirt $user
-sed -i "s/^#user = \"root\"/user = \"$user\"/" /etc/libvirt/qemu.conf
-sed -i "s/^#group = \"root\"/group = \"$user\"/" /etc/libvirt/qemu.conf
+# TODO: update the sed commands underneath
+# sed -i "s/^#user = \"root\"/user = \"$user\"/" /etc/libvirt/qemu.conf
+# sed -i "s/^#group = \"root\"/group = \"$user\"/" /etc/libvirt/qemu.conf
 systemctl enable libvirtd.service
 
 # CLEAN UP

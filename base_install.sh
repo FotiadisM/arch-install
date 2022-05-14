@@ -31,7 +31,7 @@ umount /mnt
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@ /mnt
 
 mkdir -p /mnt/{boot,home,tmp,var/log,var/cache,var/lib/flatpak,var/lib/libvirt,srv,root,opt,usr/local,.snapshots}
-chattr +C /var/lib/libvirt
+chattr +C /mnt/var/lib/libvirt
 
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@home /mnt/home
 mount $dev"3" -o noatime,compress=zstd,discard=async,space_cache=v2,ssd_spread,subvol=@tmp /mnt/tmp
