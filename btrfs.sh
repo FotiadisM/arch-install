@@ -41,4 +41,5 @@ When = PostTransaction
 Exec = /usr/bin/rsync -a --delete /boot /.bootbackup
 EOF
 
+/usr/bin/rsync -a --delete /boot /.bootbackup
 systemctl enable grub-btrfs.path
