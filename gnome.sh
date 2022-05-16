@@ -3,12 +3,12 @@
 set -eux
 
 # gnome
-pacman -S --noconfirm gnome gnome-tweaks gnome-software-packagekit-plugin gst-libav xclip dconf-editor power-profiles-daemon
+pacman -S --noconfirm gnome gnome-tweaks gnome-software-packagekit-plugin gnome-shell-extension-appindicator gst-libav xclip dconf-editor power-profiles-daemon
 pacman -Rsn gnome-boxes epiphany
 yay -S extension-manager kora-icon-theme skeuos-gtk
 systemctl enable gdm.service power-profiles-daemon.service
 
-dconf load / < $1
+cat $1 | dconf load /
 
 # general
 pacman -S --noconfirm alacritty discord signal-desktop zathura zathura-pdf-mupdf xournalpp fragments libreoffice-fresh

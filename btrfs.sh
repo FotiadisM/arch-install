@@ -2,6 +2,8 @@
 
 set -eux
 
+user="fotiadis"
+
 pacman -S --noconfirm grub-btrfs snapper snap-pac rsync
 
 # needed for btrfs /tmp subvolume
@@ -19,9 +21,8 @@ mkdir /.snapshots
 mount -a
 chmod 755 /.snapshots
 chown :users /.snapshots
-# TODO: add user to ALLOW_USERS in /etc/snapper/configs/root
-# sed ALLOW_USERS=""
-# sed ALLOW_GROUPS=""
+sed -i "s/ALLOW_USERS=\"\"/ALLOW_USERS=\"$user\"/" /etc/snapper/configs/root
+sed -i "s/ALLOW_GROUPS=\"\"/ALLOW_GROUPS=\"$user\"/" /etc/snapper/configs/root
 
 # include /boot in the backup
 mkdir /etc/pacman.d/hooks/
@@ -40,5 +41,4 @@ When = PostTransaction
 Exec = /usr/bin/rsync -a --delete /boot /.bootbackup
 EOF
 
-# TODO: edit snapper root config and enable snapper systemctl services
 systemctl enable grub-btrfs.path

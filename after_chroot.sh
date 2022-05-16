@@ -30,17 +30,17 @@ pacman -S --noconfirm \
 	xdg-utils xdg-user-dirs \
 	reflector
 
-# TODO: enable experimental features for bluetooth, for battery percentage
-# check https://wiki.archlinux.org/title/Bluetooth_headset#Battery_level_reporting
-
 grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# TODO: change reflector config
+sed -i "s/^# --country France,Germany/--country $country/" /etc/xdg/reflector/reflector.conf
+sed -i "s/^--sort age/--sort rate/" /etc/xdg/reflector/reflector.conf
+
+# enable experimental features for bluetooth, for battery percentage
+sed -i "s/^#Experimental = false/Experimental = true/" /etc/bluetooth/main.conf
 
 systemctl enable NetworkManager reflector.timer fstrim.timer bluetooth.service cups.service acpid.service
 
 sed -i 's/^# %wheel ALL=(ALL:ALL) ALL/%wheel ALL=(ALL:ALL) ALL/' /etc/sudoers
 useradd -mG wheel $user
 echo $user":1234" | chpasswd
-

@@ -8,8 +8,6 @@
     - name: Synchronize clock via NTP
       command: timedatectl set-ntp true
 
-    # TODO: format and mount drives
-
     - name: Run reflector
       command: "reflector --country {{ country }} --protocol https --latest 5 --sort rate -- save /etc/pacman.d/mirrorlist"
 

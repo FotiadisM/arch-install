@@ -13,9 +13,7 @@ export NPM_CONFIG_PREFIX="${XDG_DATA_HOME:-$HOME/.local/share/}/npm"
 
 sudo pacman -S --noconfirm curl gcc nodejs npm yarn python-pip
 curl https://sh.rustup.rs -sSf | sh
-# NOTE: need to find way to download the latest
-go_version=$(wget --no-check-certificate -qO- https://golang.org/dl | grep -oP "go([0-9\.]+)\.linux-amd64\.tar\.gz" | head -n 1
-go1.18.2.linux-amd64.tar.gz)
+go_version=$(wget --no-check-certificate -qO- https://golang.org/dl | grep -oP "go([0-9\.]+)\.linux-amd64\.tar\.gz" | head -n 1)
 wget https://go.dev/dl/$go_version -O /tmp/$go_version
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf /tmp/$go_version
 
@@ -61,10 +59,15 @@ sudo pacman -S qemu-full libvirt edk2-ovmf iptables-nft dnsmasq dmidecode bridge
 sed -i 's/^#unix_sock_group = "libvirt"/unix_sock_group = "libvirt"/' /etc/libvirt/libvirtd.conf
 sed -i 's/^#unix_sock_ro_perms = "0777"/unix_sock_ro_perms = "0777"/' /etc/libvirt/libvirtd.conf
 usermod -aG libvirt $user
-# TODO: update the sed commands underneath
+# NOTE: update the sed commands underneath, only for hard drive access?
 # sed -i "s/^#user = \"root\"/user = \"$user\"/" /etc/libvirt/qemu.conf
 # sed -i "s/^#group = \"root\"/group = \"$user\"/" /etc/libvirt/qemu.conf
 systemctl enable libvirtd.service
+
+# docker
+sudo pacman -S docker
+usermod -aG docker $user
+systemctl enable docker.service
 
 # CLEAN UP
 
