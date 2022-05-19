@@ -38,6 +38,7 @@ sed -i "s/^--sort age/--sort rate/" /etc/xdg/reflector/reflector.conf
 
 # enable experimental features for bluetooth, for battery percentage
 sed -i "s/^#Experimental = false/Experimental = true/" /etc/bluetooth/main.conf
+sed -i "s/^#AutoEnable = false/AutoEnable = true/" /etc/bluetooth/main.conf
 
 systemctl enable NetworkManager reflector.timer fstrim.timer bluetooth.service cups.service acpid.service
 

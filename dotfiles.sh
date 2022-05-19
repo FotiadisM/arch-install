@@ -4,7 +4,7 @@ set -eux
 
 git clone --depth 1 https://aur.archlinux.org/yay-bin.git
 (cd yay-bin && makepkg -sic)
-yay -S git zsh stow fzf fd htop jq ripgrep tldr tmux tree pfetch lf-bin pandoc-bin
+yay -S git zsh stow fzf fd htop-vim jq ripgrep tldr tmux tree pfetch lf-bin pandoc-bin
 
 # stow
 git clone https://github.com/FotiadisM/dotfiles.git ~/.dotfiles
