@@ -28,6 +28,7 @@ git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git $ZSH
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git $ZSH_CUSTOM/themes/powerlevel10k
 git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+git clone --depth=1 https://github.com/endaaman/lxd-completion-zsh $ZSH_CUSTOM/plugins/lxd-completion-zsh
 touch ~/.config/zsh/.zsh_history
 
 # CLEAN UP
