@@ -23,7 +23,7 @@ sed -i 's/^#ParallelDownloads = 5/ParallelDownloads = 10/' /etc/pacman.conf
 
 pacman -S --noconfirm \
 	base-devel \
-	grub efibootmgr mtools dosfstools \
+	grub efibootmgr mtools dosfstools ntfs-3g \
 	networkmanager network-manager-applet wpa_supplicant \
 	bluez bluez-utils cups acpid \
 	alsa-utils pipewire pipewire-alsa pipewire-jack pipewire-pulse wireplumber \
