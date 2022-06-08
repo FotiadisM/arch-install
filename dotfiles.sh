@@ -16,7 +16,7 @@ git clone --depth 1 https://github.com/wbthomason/packer.nvim.git ~/.local/share
 
 # lf
 sudo pacman -S ffmpegthumbnailer imagemagick poppler gnome-epub-thumbnailer wkhtmltopdf bat chafa python-pip
-pip install ueberzug
+python -m pip install ueberzug
 
 # tmux
 git clone https://github.com/tmux-plugins/tpm ~/.config/tmux/plugins/tpm

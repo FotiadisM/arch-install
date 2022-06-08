@@ -24,6 +24,8 @@ chown :users /.snapshots
 sed -i "s/ALLOW_USERS=\"\"/ALLOW_USERS=\"$user\"/" /etc/snapper/configs/root
 sed -i "s/ALLOW_GROUPS=\"\"/ALLOW_GROUPS=\"$user\"/" /etc/snapper/configs/root
 
+# NOTE: edit /etc/snapper/configs/root
+
 # include /boot in the backup
 mkdir /etc/pacman.d/hooks/
 cat > etc/pacman.d/hooks/95-bootbackup.hook << EOF
@@ -42,4 +44,4 @@ Exec = /usr/bin/rsync -a --delete /boot /.bootbackup
 EOF
 
 /usr/bin/rsync -a --delete /boot /.bootbackup
-systemctl enable grub-btrfs.path
+systemctl enable grub-btrfs.path snapper-cleanup.timer

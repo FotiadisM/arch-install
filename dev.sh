@@ -48,3 +48,4 @@ cat > etc/subgid << EOF
 root:100000:65536
 $user:100000:65536
 EOF
+# NOTE: run lxd init --auto
