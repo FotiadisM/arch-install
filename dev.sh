@@ -4,7 +4,7 @@ set -ux
 
 user="fotiadis"
 
-sudo pacman -S curl wget man-db man-pages gcc nodejs npm yarn python-pip kubectl helm github-cli hugo
+sudo pacman -S curl wget man-db man-pages gcc nodejs npm yarn python-pip kubectl helm github-cli hugo k9s
 
 # rust
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share/}/rustup"
