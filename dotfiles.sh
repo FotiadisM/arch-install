@@ -6,9 +6,7 @@ git clone --depth 1 https://aur.archlinux.org/yay-bin.git
 (cd yay-bin && makepkg -sic)
 yay -S git zsh stow fzf fd htop-vim jq ripgrep tldr tmux tree pfetch lf-bin pandoc-bin
 
-# stow
 git clone https://github.com/FotiadisM/dotfiles.git ~/.dotfiles
-stow -d ~/.dotfiles/ -t ~/ base backgrounds scripts git zsh nvim lf tmux zathura alacritty
 
 # nvim
 sudo pacman -S gcc
@@ -30,6 +28,18 @@ git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git $ZS
 git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 git clone --depth=1 https://github.com/endaaman/lxd-completion-zsh $ZSH_CUSTOM/plugins/lxd-completion-zsh
 touch ~/.config/zsh/.zsh_history
+
+# alacritty
+fontsPath="$HOME/.local/share/fonts/ttf/DejaVuSansMono/"
+mkdir -p $fontsPath
+wget -P $fontsPath https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Regular/complete/DejaVu%20Sans%20Mono%20Nerd%20Font%20Complete%20Mono.ttf
+wget -P $fontsPath https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Italic/complete/DejaVu%20Sans%20Mono%20Oblique%20Nerd%20Font%20Complete%20Mono.ttf
+wget -P $fontsPath https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold/complete/DejaVu%20Sans%20Mono%20Bold%20Nerd%20Font%20Complete%20Mono.ttf
+wget -P $fontsPath https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/DejaVuSansMono/Bold-Italic/complete/DejaVu%20Sans%20Mono%20Bold%20Oblique%20Nerd%20Font%20Complete%20Mono.ttf
+fc-cache
+
+# stow
+stow -d ~/.dotfiles/ -t ~/ base backgrounds scripts git zsh nvim lf tmux zathura alacritty
 
 # CLEAN UP
 
