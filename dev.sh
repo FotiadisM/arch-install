@@ -49,3 +49,18 @@ root:100000:65536
 $user:100000:65536
 EOF
 # NOTE: run lxd init --auto
+
+# kubectl plugins
+export KREW_ROOT="${XDG_DATA_HOME:-$HOME/.local/share/}/krew"
+export PATH=$KREW_ROOT/bin:$PATH
+mkdir -p $KREW_ROOT
+(
+  set -x; cd "$(mktemp -d)" &&
+  OS="$(uname | tr '[:upper:]' '[:lower:]')" &&
+  ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" &&
+  KREW="krew-${OS}_${ARCH}" &&
+  curl -fsSLO "https://github.com/kubernetes-sigs/krew/releases/latest/download/${KREW}.tar.gz" &&
+  tar zxvf "${KREW}.tar.gz" &&
+  ./"${KREW}" install krew
+)
+kubectl krew install access-matrix get-all konfig node-shell resource-capacity slice
