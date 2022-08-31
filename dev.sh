@@ -6,6 +6,12 @@ user="fotiadis"
 
 sudo pacman -S curl wget man-db man-pages gcc nodejs npm yarn python-pip kubectl helm k9s kustomize github-cli hugo jq yq
 
+# kubernetes
+yay -S ngrok
+ngrok completion zsh > ~/.local/share/oh-my-zsh/completions/_ngrok
+curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+k3d completion zsh > .local/share/oh-my-zsh/completions/_k3d
+
 # rust
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share/}/rustup"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share/}/cargo"
