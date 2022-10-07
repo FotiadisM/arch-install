@@ -8,10 +8,6 @@ yay -S git zsh stow fzf fd htop-vim jq ripgrep tldr tmux tree pfetch lf-bin pand
 
 git clone https://github.com/FotiadisM/dotfiles.git ~/.dotfiles
 
-# nvim
-sudo pacman -S gcc
-git clone --depth 1 https://github.com/wbthomason/packer.nvim.git ~/.local/share/nvim/site/pack/packer/start/packer.nvim
-
 # lf
 sudo pacman -S ffmpegthumbnailer imagemagick poppler gnome-epub-thumbnailer wkhtmltopdf bat chafa python-pip
 python -m pip install ueberzug

@@ -1,0 +1,51 @@
+# Maintainer: Fotiadis Michalis <fotiadis.michalis20@gmail.com>
+pkgname=fotiadis-devel
+pkgver=1
+pkgrel=1
+arch=('x86_64')
+pkgdesc="Dependencies and configuration for my personal development environment"
+url='https://github.com/FotiadisM/fotiadis-devel'
+depends=(
+	'git'
+	'curl'
+	'wget'
+	'man-db'
+	'man-pages'
+
+	'gcc'
+	'go'
+	'rustup'
+	'nodejs'
+	'npm'
+	'yarn'
+	'python-pip'
+
+	'zsh'
+	'stow'
+	'fzf'
+	'fd'
+	'htop-vim'
+	'jq'
+	'ripgrep'
+	'tldr'
+	'tmux'
+	'tree'
+	'pfetch'
+
+	'docker'
+	'kubectl'
+	'helm'
+	'k9s'
+	'kustomize'
+	'github-cli'
+	'hugo'
+	'jq'
+	'yq'
+)
+
+package() {
+	curl -s https://raw.githubusercontent.com/k3d-io/k3d/main/install.sh | bash
+
+	usermod -aG docker $USER
+	systemctl enable docker.service
+}
